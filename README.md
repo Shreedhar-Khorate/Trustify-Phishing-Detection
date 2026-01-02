@@ -1,96 +1,162 @@
-# 🛡️ Trustify - Phishing Detection System
+# 🛡️ Trustify - AI Phishing Detection System
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-![Flask](https://img.shields.io/badge/framework-Flask-green)
-![Status](https://img.shields.io/badge/status-Active-success)
+<div align="center">
 
-**Trustify** is a machine learning-based web application designed to detect and analyze phishing URLs in real-time. By combining traditional ML algorithms with Generative AI, it provides users with accurate threat assessments and detailed security reports to protect against cyber threats.
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-2.0%2B-green?style=for-the-badge&logo=flask&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
+
+**Verify Links Instantly. Protect yourself from fake domains, brand impersonation, and malicious websites in real-time.**
+
+</div>
 
 ---
 
-## 🚀 Key Features
+## 📖 Overview
 
-- **Real-Time URL Analysis:** Instantly classifies URLs as "Phishing" or "Legitimate" using a trained Machine Learning model.
-- **Hybrid AI Approach:** Utilizes **TF-IDF** for feature extraction and a **Linear Support Vector Classifier (SVC)** for high-accuracy classification.
-- **Generative AI Insights:** Integrated with **OpenAI** to provide natural language explanations of _why_ a specific URL is flagged as dangerous.
-- **Domain Intelligence:** Performs **WHOIS lookups** to gather domain age, registrar, and other metadata to support the risk assessment.
-- **Automated Reporting:** Generates downloadable **PDF security reports** summarizing the analysis results for the user.
-- **User-Friendly Interface:** A clean, responsive web interface built with **Flask**, HTML, CSS, and JavaScript.
+**Trustify** is a cutting-edge cybersecurity tool designed to combat the rising threat of phishing attacks. By leveraging a hybrid approach of **Machine Learning (LinearSVC)** and **Generative AI (OpenAI)**, Trustify doesn't just tell you if a link is bad—it tells you _why_.
+
+The system analyzes URL patterns, fetches real-time domain registration data (WHOIS), and generates comprehensive PDF security reports, making it an essential tool for both individuals and security analysts.
+
+---
+
+## ✨ Key Features
+
+### 🔍 Intelligent Analysis
+
+- **Real-Time Detection:** Instantly classifies URLs as "Phishing" or "Legitimate" with high accuracy.
+- **Hybrid AI Engine:** Combines TF-IDF vectorization + LinearSVC for speed, and OpenAI for contextual understanding.
+- **Domain Forensics:** Automatically performs WHOIS lookups to check domain age, registrar, and expiry data.
+
+### 📊 Detailed Reporting
+
+- **AI-Powered Explanations:** Get natural language insights on why a specific URL was flagged.
+- **PDF Reports:** Generate and download professional security reports for documentation or sharing.
+- **Visual Indicators:** Clear, color-coded results (Safe/Suspicious/Phishing) for immediate decision-making.
+
+### 💻 Modern Interface
+
+- **Clean UI/UX:** Built with a responsive design using modern CSS and Inter font.
+- **Fast Performance:** Lightweight Flask backend ensures rapid response times.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Python, Flask
-- **Machine Learning:** Scikit-learn (LinearSVC, TfidfVectorizer), Pandas, NumPy
-- **AI Integration:** OpenAI API
-- **Utilities:** Joblib (Model persistence), Python-whois (Domain info), FPDF (Report generation)
-- **Frontend:** HTML5, CSS3, JavaScript
+| Component     | Technology         | Description                              |
+| :------------ | :----------------- | :--------------------------------------- |
+| **Backend**   | Python, Flask      | Core application logic and API handling  |
+| **ML Model**  | Scikit-learn       | LinearSVC model trained on 500k+ URLs    |
+| **NLP**       | TF-IDF             | Feature extraction from URL strings      |
+| **GenAI**     | OpenAI API         | Generates human-readable threat analysis |
+| **Data**      | Pandas, NumPy      | Data manipulation and preprocessing      |
+| **Utilities** | Python-whois, FPDF | Domain lookup and PDF generation         |
+| **Frontend**  | HTML5, CSS3, JS    | Responsive user interface                |
 
 ---
 
 ## 📂 Project Structure
 
-```
+```bash
 Trustify-Phishing-Detection/
-├── app.py                  # Main Flask application
-├── model.ipynb             # Jupyter notebook for model training
-├── phishing_url_model.pkl  # Trained ML model
-├── tfidf_vectorizer.pkl    # TF-IDF Vectorizer
-├── requirements.txt        # Python dependencies
-├── dataset/                # Training datasets
-├── static/                 # CSS, JS, and images
-├── templates/              # HTML templates
-└── README.md               # Project documentation
+├── app.py                  # 🚀 Main Flask application entry point
+├── model.ipynb             # 📓 Jupyter notebook for model training & evaluation
+├── phishing_url_model.pkl  # 🧠 Pre-trained Machine Learning model
+├── tfidf_vectorizer.pkl    # 🔢 Saved TF-IDF Vectorizer
+├── requirements.txt        # 📦 List of Python dependencies
+├── .env                    # 🔑 Environment variables (API keys)
+├── dataset/                # 📊 Training datasets (CSV)
+├── static/                 # 🎨 Static assets (CSS, JS, Images)
+├── templates/              # 📄 HTML Templates (Jinja2)
+└── README.md               # 📝 Project documentation
 ```
 
-## ⚙️ Installation
+---
 
-1.  **Clone the repository:**
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Git
+
+### Installation
+
+1.  **Clone the repository**
 
     ```bash
     git clone https://github.com/yourusername/Trustify-Phishing-Detection.git
     cd Trustify-Phishing-Detection
     ```
 
-2.  **Create a virtual environment (optional but recommended):**
+2.  **Create a Virtual Environment**
 
     ```bash
-    python -m venv venv
     # Windows
+    python -m venv venv
     venv\Scripts\activate
-    # Mac/Linux
+
+    # macOS/Linux
+    python3 -m venv venv
     source venv/bin/activate
     ```
 
-3.  **Install dependencies:**
+3.  **Install Dependencies**
 
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Set up Environment Variables:**
+4.  **Configure Environment**
     Create a `.env` file in the root directory and add your OpenAI API key:
 
     ```env
-    OPENAI_API_KEY=your_api_key_here
+    OPENAI_API_KEY=sk-your_openai_api_key_here
     ```
 
-5.  **Run the Application:**
+5.  **Run the Application**
+
     ```bash
     python app.py
     ```
-    Access the app at `http://127.0.0.1:5000`.
+
+6.  **Access the Dashboard**
+    Open your browser and navigate to: `http://127.0.0.1:5000`
+
+---
+
+## 🧠 Model Architecture
+
+The core detection engine is built on a **Linear Support Vector Classifier (LinearSVC)**.
+
+1.  **Data Collection:** Trained on a balanced dataset of legitimate and phishing URLs.
+2.  **Preprocessing:** URLs are tokenized and vectorized using **TF-IDF** (Term Frequency-Inverse Document Frequency).
+3.  **Training:** The model learns to distinguish patterns (e.g., excessive hyphens, IP addresses, suspicious subdomains).
+4.  **Inference:** New URLs are vectorized and passed through the model for a binary classification (0: Safe, 1: Phishing).
+
+---
+
+## 🔮 Future Scope
+
+- [ ] Browser Extension integration.
+- [ ] Deep Learning (LSTM/CNN) for improved accuracy on obfuscated URLs.
+- [ ] API endpoint for external developers.
+- [ ] User dashboard with history of scanned URLs.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
 
 ## 👨‍💻 Author
 
 **Shreedhar Khorate**
+
+<div align="center">
+  <p>Made with ❤️ for a safer internet</p>
+</div>
