@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trustify | AI Phishing Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="nav-left">
+        <span class="logo-text">Trustify</span>
+    </div>
+
+    <div class="nav-right">
+          <a href="#analysis">Analysis</a>
+        <a href="#features">Features</a>
+        <a href="#learn">Learn</a>
+      
+        <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+    </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero container" id="analysis">
+    <h1>Verify Links Instantly</h1>
+    <p>
+        Advanced AI-powered phishing detection. Protect yourself from fake domains, 
+        brand impersonation, and malicious websites in real-time.
+    </p>
+
+    <div class="hero-input">
+        <input
+            type="text"
+            id="urlInput"
+            placeholder="Paste a URL to analyze (e.g. https://example.com)"
+            autocomplete="off"
+        >
+        <button id="checkBtn">Analyze</button>
+    </div>
+
+    <div class="examples">
+        <small>Try an example:</small>
+        <div class="example-list">
+            <!-- ✅ LEGITIMATE -->
+            <button class="example-btn" data-url="https://google.com">google.com</button>
+            <button class="example-btn" data-url="https://paypal.com">paypal.com</button>
+            <button class="example-btn" data-url="https://amazon.com">amazon.com</button>
+
+            <!-- ⚠️ SUSPICIOUS -->
+            <button class="example-btn" data-url="http://paypal-login.com">paypal-login.com</button>
+            <button class="example-btn" data-url="https://verify-paypa1-account.tk/login">verify-paypa1.tk</button>
+            <button class="example-btn" data-url="http://192.168.0.5/login">IP Address URL</button>
+        </div>
+    </div>
+</section>
+
+<!-- ================= ANALYSIS RESULT ================= -->
+<section class="result-section hidden container" id="resultCard">
+
+    <div class="result-header">
+        <div>
+            <p class="eyebrow">Analysis Report</p>
+            <h2>Security Assessment</h2>
+        </div>
+        <div class="header-actions">
+            <button id="exportBtn" class="btn-secondary">
+                📄 Export PDF
+            </button>
+            <div class="pill" id="resultPill">Processing...</div>
+        </div>
+    </div>
+
+    <div class="result-grid">
+        <!-- LEFT COLUMN: METRICS & BREAKDOWN -->
+        <div class="metrics-card">
+            <!-- STATUS -->
+            <div class="status-box">
+                <span id="statusIcon"></span>
+                <div class="status-text-group">
+                    <span id="statusText"></span>
+                    <small id="statusSubtext">AI + Heuristic Analysis</small>
+                </div>
+            </div>
+
+            <!-- SCORE -->
+            <div class="score-box">
+                <div class="score-header">
+                    <span>Trust Score</span>
+                    <span id="riskValue">0/100</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <!-- BREAKDOWN LIST -->
+            <!-- ANALYSIS BREAKDOWN (VISUAL) -->
+            <div class="breakdown-grid">
+                <!-- Domain Analysis -->
+                <div class="breakdown-card">
+                    <div class="card-header">
+                        <span class="card-icon">🌐</span>
+                        <h4>Domain Analysis</h4>
+                    </div>
+                    <div id="domainVisuals" class="visual-list">
+                        <div class="empty-state">Waiting for analysis...</div>
+                    </div>
+                </div>
+
+                <!-- Security Signals -->
+                <div class="breakdown-card">
+                    <div class="card-header">
+                        <span class="card-icon">🔒</span>
+                        <h4>Security Signals</h4>
+                    </div>
+                    <div id="securityVisuals" class="visual-list">
+                        <div class="empty-state">Waiting for analysis...</div>
+                    </div>
+                </div>
+
+                <!-- URL Structure -->
+                <div class="breakdown-card">
+                    <div class="card-header">
+                        <span class="card-icon">📏</span>
+                        <h4>URL Structure</h4>
+                    </div>
+                    <div id="structureVisuals" class="progress-list">
+                        <div class="empty-state">Waiting for analysis...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: AI & FEATURES -->
+        <div class="analysis-column">
+            <div class="card">
+                <h3>✨ AI Insight</h3>
+                <div id="aiAnalysis" class="ai-content"></div>
+            </div>
+
+            <div class="card">
+                <h3>📊 URL Features</h3>
+                <div id="featureList" class="feature-grid-mini"></div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="features" id="features">
+    <div class="container">
+        <h2>Why Choose Trustify?</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>⚡ Real-Time AI</h3>
+                <p>Our advanced machine learning models analyze URL patterns instantly to detect zero-day phishing attacks.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🔍 Deep Inspection</h3>
+                <p>We check for typosquatting, homograph attacks, and suspicious redirects that traditional filters miss.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🛡️ Brand Protection</h3>
+                <p>Automatically identifies attempts to impersonate major brands like Google, PayPal, and Amazon.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section class="education container" id="learn">
+    <div class="edu-header">
+        <h2>Understanding Cyber Threats</h2>
+        <p>Stay one step ahead by recognizing common attack vectors.</p>
+    </div>
+
+    <div class="edu-grid">
+        <div class="edu-card">
+            <div class="icon-box">🎣</div>
+            <h3>What is Phishing?</h3>
+            <p>
+                Phishing is a cybercrime where attackers pose as legitimate institutions 
+                (like banks or Google) to trick you into revealing sensitive data such as 
+                passwords, credit card numbers, or personal information.
+            </p>
+        </div>
+
+        <div class="edu-card">
+            <div class="icon-box">🚩</div>
+            <h3>Red Flags to Spot</h3>
+            <ul class="edu-list">
+                <li><strong>Urgency:</strong> "Act now or your account will be closed!"</li>
+                <li><strong>Mismatched URLs:</strong> `paypal-secure-login.com` instead of `paypal.com`</li>
+                <li><strong>Generic Greetings:</strong> "Dear Customer" instead of your name.</li>
+                <li><strong>Suspicious Attachments:</strong> Unexpected invoices or zip files.</li>
+            </ul>
+        </div>
+
+        <div class="edu-card">
+            <div class="icon-box">🛡️</div>
+            <h3>How to Stay Safe</h3>
+            <ul class="edu-list">
+                <li><strong>Verify the URL:</strong> Always check the domain name carefully.</li>
+                <li><strong>Enable 2FA:</strong> Two-factor authentication adds a layer of security.</li>
+                <li><strong>Don't Click:</strong> Hover over links to see the actual destination.</li>
+                <li><strong>Use Trustify:</strong> Scan suspicious links before visiting.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- ================= RECENT SCANS ================= -->
+<section class="container" id="recentScansSection" style="margin-top: 3rem; display: none;">
+    <h3>Recent Scans</h3>
+    <div class="recent-list" id="recentList">
+        <!-- Populated by JS -->
+    </div>
+</section>
+<!-- ================= FOOTER ================= -->
+<footer>
+    <p>© 2025 Trustify Security. All rights reserved.</p>
+</footer>
+
+<!-- ================= CHATBOT ================= -->
+<div class="chat-widget">
+    <button id="chatToggleBtn" class="chat-toggle-btn">
+        💬
+    </button>
+    
+    <div id="chatWindow" class="chat-window hidden">
+        <div class="chat-header">
+            <span>Trustify Assistant</span>
+            <button id="chatCloseBtn">×</button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <div class="message bot">
+                Hello! I'm your cybersecurity assistant. How can I help you stay safe today?
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ask about phishing...">
+            <button id="chatSendBtn">➤</button>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

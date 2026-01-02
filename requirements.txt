@@ -1,0 +1,8 @@
+flask
+joblib
+python-dotenv
+scikit-learn
+numpy
+pandas
+fpdf
+python-whois
