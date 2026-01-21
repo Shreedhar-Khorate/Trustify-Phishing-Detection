@@ -1,5 +1,8 @@
 # 🛡️ Trustify - AI Phishing Detection System
-
+<div align="center">
+  <img src="./static/favicon.ico" alt="Application Interface" width="800">
+  <p><em>Dashboard View</em></p>
+</div>
 <div align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)
@@ -43,7 +46,9 @@ The system analyzes URL patterns, fetches real-time domain registration data (WH
 
 ---
 
-## 🛠️ Tech Stack
+
+
+## �🛠️ Tech Stack
 
 | Component     | Technology         | Description                              |
 | :------------ | :----------------- | :--------------------------------------- |
