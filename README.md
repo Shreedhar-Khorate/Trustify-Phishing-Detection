@@ -1,7 +1,7 @@
 # 🛡️ Trustify - AI Phishing Detection System
 <div align="center">
-  <img src="./static/favicon.ico" alt="Application Interface" width="800">
-  <p><em>Dashboard View</em></p>
+  <img src="./static/favicon.ico" alt="Application Interface" width="200">
+ 
 </div>
 <div align="center">
 
