@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from urllib.parse import urlparse
 import difflib
-from openai import OpenAI
+import google.generativeai as genai
 from fpdf import FPDF
 import whois
 from datetime import datetime
@@ -48,7 +48,8 @@ def to_native(val):
 # Load Environment
 # =========================
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 
 # =========================
 # Known Brands
@@ -291,22 +292,15 @@ Final Verdict:
 Recommendation:
 """
 
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are a cybersecurity analyst."},
-                {"role": "user", "content": prompt}
-            ]
-        )
-
-        ai_suggestion = clean_text(response.choices[0].message.content)
+        response = gemini_model.generate_content(prompt)
+        ai_suggestion = clean_text(response.text)
 
     except Exception as e:
-        print(f"OpenAI Error: {e}")
+        print(f"Gemini API Error: {e}")
         if "429" in str(e) or "quota" in str(e).lower():
-            ai_suggestion = "ChatGPT API rate limit or quota exceeded."
+            ai_suggestion = "Gemini API rate limit or quota exceeded."
         else:
-            ai_suggestion = "ChatGPT API unavailable."
+            ai_suggestion = "Gemini API unavailable."
 
     return jsonify({
         "result": result,
@@ -381,14 +375,10 @@ def api_chat():
         return jsonify({"error": "Empty message"}), 400
 
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are Trustify's AI Cybersecurity Assistant. Help users understand phishing, analyze URLs, and learn about online safety. Keep answers concise, professional, and helpful."},
-                {"role": "user", "content": user_msg}
-            ]
-        )
-        reply = clean_text(response.choices[0].message.content)
+        system_prompt = "You are Trustify's AI Cybersecurity Assistant. Help users understand phishing, analyze URLs, and learn about online safety. Keep answers concise, professional, and helpful."
+        full_prompt = f"{system_prompt}\n\nUser: {user_msg}"
+        response = gemini_model.generate_content(full_prompt)
+        reply = clean_text(response.text)
         return jsonify({"reply": reply})
     except Exception as e:
         print(f"Chat Error: {e}")
